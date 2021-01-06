@@ -2,14 +2,21 @@
 echo "Welcome to the branch"
 
 isPresent=1
-wagePerHrs=20
+isPartTime=2
+ratePerHrs=20
 noOfHrs=8
-checkAttendance=$((RANDOM%2))
+noOfPartTimeHrs=4
+checkAttendance=$((RANDOM%3))
 
 if [ $checkAttendance -eq $isPresent ]
 then 
 	echo "Employee is present"
-	payment=$(($wagePerHrs*$noOfHrs))
+	payment=$(($ratePerHrs*$noOfHrs))
+	echo "$payment"
+elif [ $isPartTime -eq $checkAttendance ]
+then
+	echo "Employee is part time"
+	payment=$(($ratePerHrs*$noOfPartTimeHrs))
 	echo "$payment"
 else
 	echo "Employee is absent"
