@@ -8,20 +8,27 @@ maxHrsInMonth=4
 
 totalEmpHr=0
 totalWorkingDays=0
+
+function getWorkingHrs ()
+{
+	case $1 in
+   $isFullTime)
+         empHrs=8;;
+
+   $isPartTime)
+         empHrs=4;;
+
+   *)
+         empHrs=0;;
+esac
+echo $empHrs
+
+}
 while [[ $totalEmpHr -lt $maxHrsInMonth && $totalWorkingDays -lt $numWorkingDays ]]
 do
 ((totalWorkingDays++))
-empCheck=$((RANDOM%3))
-case $empCheck in
-	$isFullTime)
-			empHrs=8;;
-	
-	$isPartTime)
-			empHrs=4;;
-	
-	*)
-			empHrs=0;;
-esac
+empHrs="$( getWorkingHrs $((RANDOM%3)) )"
+
 salary=$(($empHrs*$empRatePerHr))
 totalSalary=$(($totalSalary+$salary))
 totalEmpHr=$(($totalEmpHr+$empHrs))
